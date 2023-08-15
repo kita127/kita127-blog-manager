@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Entries\GetEntryController;
+use App\Http\Controllers\Entries\GetAnEntryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group([], function () {
-    Route::get('/entries', GetEntryController::class);
+    Route::group(['prefix' => '/entries'], function () {
+        Route::get('/', GetEntryController::class);
+        Route::get('/{entryId}', GetAnEntryController::class)->where(['entryId' => '[0-9]+']);
+    });
+
 });

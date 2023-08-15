@@ -9,19 +9,17 @@ class EntryService
 {
     public function getEntries(): array
     {
-        $userId = env('USER_ID');
-        $apiKey = env('API_KEY');
-        $nextUrl = env('API_URI');
-
-        if (!$userId || !$apiKey || !$nextUrl) {
-            throw new HttpClientException('envが設定されていません.');
-        }
+        [
+            'userId' => $userId,
+            'apiKey' => $apiKey,
+            'apiUri' => $nextUrl,
+        ] = $this->getEnv();
 
         $entries = [];
-        $basicAuth = $userId . ':' . $apiKey;
+        $basicAuth = $this->getBasicAuth($userId, $apiKey);
         while ($nextUrl) {
             $endpoint = $nextUrl;
-            $response = $this->requestEntries($endpoint, $basicAuth);
+            $response = $this->requestHatena($endpoint, $basicAuth);
             $nextUrl = $this->getNextUrl($response);
             $entries = array_merge($entries, $this->fetchEntries($response));
         }
@@ -29,6 +27,21 @@ class EntryService
         return $entries;
 
     }
+
+    public function getEntry(string $entryId): array
+    {
+        [
+            'userId' => $userId,
+            'apiKey' => $apiKey,
+            'apiUri' => $apiUri,
+        ] = $this->getEnv();
+        $basicAuth = $this->getBasicAuth($userId, $apiKey);
+        $response = $this->requestHatena($apiUri . '/' . $entryId, $basicAuth);
+        $result = $this->fetchEntry($response);
+        $result['entryId'] = $entryId;
+        return $result;
+    }
+
     public function getNextUrl(string $contents): string
     {
         $xmlString = $contents;
@@ -86,7 +99,9 @@ class EntryService
                             && $one->nodeValue === 'edit'
                             && $two->nodeName === 'href'
                         ) {
-                            $tmp['entryId'] = $two->nodeValue;
+                            $entryIdFull = $two->nodeValue;
+                            $entryId = last(explode('/', $entryIdFull));
+                            $tmp['entryId'] = $entryId;
                         }
                     }
 
@@ -102,7 +117,7 @@ class EntryService
         return $result;
     }
 
-    private function requestEntries(string $uri, string $basicAuth): string
+    private function requestHatena(string $uri, string $basicAuth): string
     {
         // < GET通信編 >
         $headers = [
@@ -133,5 +148,41 @@ class EntryService
         curl_close($get_curl);
 
         return $get_response;
+    }
+
+    private function getEnv(): array
+    {
+        $userId = env('USER_ID');
+        $apiKey = env('API_KEY');
+        $apiUri = env('API_URI');
+
+        if (!$userId || !$apiKey || !$apiUri) {
+            throw new HttpClientException('envが設定されていません.');
+        }
+
+        return [
+            'userId' => $userId,
+            'apiKey' => $apiKey,
+            'apiUri' => $apiUri,
+        ];
+    }
+
+    private function getBasicAuth(string $userId, string $apiKey): string
+    {
+        return $userId . ':' . $apiKey;
+
+    }
+
+    private function fetchEntry(string $contents): array
+    {
+        $dom = new DOMDocument();
+        $dom->loadXML($contents);
+        $titles = $dom->getElementsByTagName('title');
+        $contents = $dom->getElementsByTagName('content');
+        return [
+            'title' => $titles->item(0)->nodeValue,
+            'contents' => $contents->item(0)->nodeValue,
+        ];
+
     }
 }
