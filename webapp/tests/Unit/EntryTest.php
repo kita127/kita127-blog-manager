@@ -33,7 +33,7 @@ class EntryTest extends TestCase
         $this->assertSame(
             [
                 [
-                    'entryId' => 'https://blog.hatena.ne.jp/hoge/hoge.hatenablog.com/atom/entry/019393884938829',
+                    'entryId' => '019393884938829',
                     'title' => 'はてなブログの WEB API を使う',
                 ],
             ],
