@@ -5,7 +5,7 @@ namespace Tests\Feature;
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class EntryTest extends TestCase
 {
     /**
      * A basic test example.
@@ -18,4 +18,12 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_01_01_get_entries()
+    {
+        $response = $this->get('api/entries');
+        $response->assertStatus(200);
+//        $this->assertSame([], $response->json());
+    }
+
 }

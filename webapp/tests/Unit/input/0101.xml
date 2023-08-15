@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:app="http://www.w3.org/2007/app">
+
+  <link rel="first" href="https://blog.hatena.ne.jp/hoge/hoge.hatenablog.com/atom/entry" />
+
+  
+  <link rel="next" href="https://blog.hatena.ne.jp/hoge/hoge.hatenablog.com/atom/entry?page=11111111111" />
+  
+
+  <title>hogeのブログ</title>
+  
+  <link rel="alternate" href="https://hoge.hatenablog.com/"/>
+  <updated>2023-05-17T00:49:37+09:00</updated>
+  <author>
+    <name>hoge</name>
+  </author>
+  <generator uri="https://blog.hatena.ne.jp/" version="1283221818282818182">Hatena::Blog</generator>
+  <id>hatenablog://blog/1283221818282818182</id>
+
+  
+  <entry>
+<id>tag:blog.hatena.ne.jp,2013:blog-hoge-xxxxxxxxxxxxx</id>
+<link rel="edit" href="https://blog.hatena.ne.jp/hoge/hoge.hatenablog.com/atom/entry/019393884938829"/>
+<link rel="alternate" type="text/html" href="https://hoge.hatenablog.com/entry/2023/05/17/00dlskjd"/>
+<author><name>hoge</name></author>
+<title>はてなブログの WEB API を使う</title>
+<updated>2023-05-17T00:55:44+09:00</updated>
+<published>2023-05-17T00:49:37+09:00</published>
+<app:edited>2023-05-17T00:55:43+09:00</app:edited>
+<summary type="text">はてなブログの WEB API を使う やりたいこと はてなブログが公開している WEB API, Atom Pub API を使用した 記事の作成, 更新をするスクリプトを作成したため覚書記事を作成します. 本記事では Atom Pub API を使用した記事の取得, 新規作成…</summary>
+
+<app:control>
+  <app:draft>no</app:draft>
+</app:control>
+
+  </entry>
+  
+</feed>

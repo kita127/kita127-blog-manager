@@ -1,8 +1,6 @@
-# docker-apache-example
-Docker + Apache + Laravel の Web アプリケーションサンプル
+# kita127-blog-manager
 
-詳細は以下を参照
-https://kita127.hatenablog.com/entry/2022/10/02/145614
+自分のブログ管理アプリケーション
 
 
 ## description
@@ -21,11 +19,15 @@ $ make down
 
 ### Usage
 
-1. Initialize 実行
-1. `apache` コンテナに入る
+1. `.env` の以下を設定する
+    1. `USER_ID`, `API_KEY`, `API_URI`
+3. Initialize 実行
+4. `apache` コンテナに入る
     1. `$ docker compose exec apache bash`
-1. `$ npm run dev` を実行する
-1.  ブラウザから `http://localhost:80` にアクセス
+5. `$ npm run dev` を実行する
+6.  ブラウザから `http://localhost:80` にアクセス
+
+
 
 ## Enviroment
 
@@ -40,7 +42,6 @@ $ make down
 - vue branch
     - Vue.js
     - TypeScript
-    - Chrome DevTool などから開発者ツールを開きコンソールに Vue のバージョンが表示されればOK
 
 ## Vite
 
