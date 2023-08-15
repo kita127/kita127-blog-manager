@@ -20,10 +20,25 @@ class EntryTest extends TestCase
     public function test_01_01_get_next_url(): void
     {
         $contents = file_get_contents(__DIR__ . '/input/0101.xml');
-
         $service = new EntryService();
-
         $actual = $service->getNextUrl($contents);
         $this->assertSame('https://blog.hatena.ne.jp/hoge/hoge.hatenablog.com/atom/entry?page=11111111111', $actual);
+    }
+
+    public function test02_01_get_entry_list(): void
+    {
+        $contents = file_get_contents(__DIR__ . '/input/0101.xml');
+        $service = new EntryService();
+        $actual = $service->fetchEntries($contents);
+        $this->assertSame(
+            [
+                [
+                    'entryId' => 'https://blog.hatena.ne.jp/hoge/hoge.hatenablog.com/atom/entry/019393884938829',
+                    'title' => 'はてなブログの WEB API を使う',
+                ],
+            ],
+            $actual
+        );
+
     }
 }

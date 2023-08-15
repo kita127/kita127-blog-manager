@@ -7,7 +7,7 @@ use Illuminate\Http\Client\HttpClientException;
 
 class EntryService
 {
-    public function getEntries(): string
+    public function getEntries(): array
     {
         // < GET通信編 >
 
@@ -48,7 +48,9 @@ class EntryService
         // 5. curlの処理を終了 => コネクションを切断
         curl_close($get_curl);
 
-        return $get_response;
+        $nextUrl = $this->getNextUrl($get_response);
+
+        return ['nextUrl' => $nextUrl, 'contents' => $get_response];
 
     }
 
@@ -80,12 +82,48 @@ class EntryService
                 break;
             }
         }
-
-
-        // if ($links->length > 0) {
-        //     $elementValue = $links->item($id);
-        // }
-
         return $nextUrl;
+    }
+
+    public function fetchEntries(string $xml): array
+    {
+        $dom = new DOMDocument();
+        $dom->loadXML($xml);
+
+        $entries = $dom->getElementsByTagName('entry');
+
+        $result = [];
+        foreach ($entries as $entry) {
+            $tmp = [];
+            $children = $entry->childNodes;
+            foreach ($children as $child) {
+                $name = $child->nodeName;
+                $value = $child->nodeValue;
+
+                if ($name === 'link') {
+                    // エントリーIDを取得
+                    $attrs = $child->attributes;
+                    if ($attrs->count() >= 2) {
+                        $one = $attrs->item(0);
+                        $two = $attrs->item(1);
+                        if (
+                            $one->nodeName === 'rel'
+                            && $one->nodeValue === 'edit'
+                            && $two->nodeName === 'href'
+                        ) {
+                            $tmp['entryId'] = $two->nodeValue;
+                        }
+                    }
+
+                } else if ($name === 'title') {
+                    // タイトル取得
+                    $tmp['title'] = $value;
+                }
+            }
+            $result[] = $tmp;
+
+        }
+
+        return $result;
     }
 }
