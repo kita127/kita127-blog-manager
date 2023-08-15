@@ -16,13 +16,7 @@ class GetEntryController extends Controller
      */
     public function __invoke(Request $request, EntryService $service): array
     {
-        [
-            'nextUrl' => $nextUrl,
-            'contents' => $contents
-        ] = $service->getEntries();
-
-            
-
-        return ['contents' => $contents];
+        $entries = $service->getEntries();
+        return ['entries' => $entries];
     }
 }

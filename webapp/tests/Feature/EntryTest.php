@@ -23,7 +23,10 @@ class EntryTest extends TestCase
     {
         $response = $this->get('api/entries');
         $response->assertStatus(200);
-//        $this->assertSame([], $response->json());
+        $contents = $response->json();
+        $one = $contents['entries'];
+        $this->assertArrayHasKey('entryId', $one[0]);
+        $this->assertArrayHasKey('title', $one[0]);
     }
 
 }
