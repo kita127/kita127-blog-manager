@@ -1,5 +1,6 @@
 <template>
-    <router-link to="/sena">遷移</router-link>
+    <h1>Index</h1>
+    <router-link to="/about">About</router-link>
     {{ message }}
 </template>
 <script lang="ts">

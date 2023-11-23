@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import sano from "./views/Sano.vue";
-import sena from "./views/Sena.vue";
+import Index from "./views/Index.vue";
+import About from "./views/About.vue";
 
 const routes = [
-    { path: '/sano', name: 'sano', component: sano },
-    { path: '/sena', name: 'sena', component: sena },
+    { path: '/', name: 'Index', component: Index },
+    { path: '/about', name: 'About', component: About },
 ]
 
 const router = createRouter({
