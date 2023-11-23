@@ -1,15 +1,8 @@
 <template>
-    {{ message }}
+    <h1>Aoubt</h1>
+    <div>{{ message }}</div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from "vue";
-
-export default defineComponent({
-    setup() {
-        const message = ref<string>("Purple");
-        return {
-            message
-        };
-    }
-});
+<script lang="ts" setup>
+import { ref } from "vue";
+const message = ref<string>("about message");
 </script>
