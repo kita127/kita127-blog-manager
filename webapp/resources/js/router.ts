@@ -3,8 +3,8 @@ import sano from "./components/Sano.vue";
 import sena from "./components/Sena.vue";
 
 const routes = [
-    { path: '/color/sano', name: 'sano', component: sano },
-    { path: '/color/sena', name: 'sena', component: sena },
+    { path: '/sano', name: 'sano', component: sano },
+    { path: '/sena', name: 'sena', component: sena },
 ]
 
 const router = createRouter({

@@ -1,5 +1,5 @@
 <template>
-    <router-link to="/color/sena">遷移</router-link>
+    <router-link to="/sena">遷移</router-link>
     {{ message }}
 </template>
 <script lang="ts">
