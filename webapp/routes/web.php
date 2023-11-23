@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/color/{any}', function () {
     return view('welcome');
-});
+})->where('any', '.*');
 
 Route::get('/hoge', \App\Http\Controllers\HogeDir\HogeController::class);
