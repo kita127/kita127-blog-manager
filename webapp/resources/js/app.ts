@@ -1,11 +1,7 @@
-import './bootstrap';
+import { createApp } from "vue"
+import router from './router';
+import App from "./components/App.vue"
 
-// import axios from 'axios';
-// window.axios = axios;
-
-// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-import { createApp } from 'vue';
-import App from './components/App.vue';
-
-createApp(App).mount('#app');
+const app = createApp(App);
+app.use(router);
+app.mount("#app")
