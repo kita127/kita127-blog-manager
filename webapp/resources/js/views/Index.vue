@@ -14,7 +14,11 @@
                 <tr v-for="[id, article] in articles">
                     <td>{{ article.id }}</td>
                     <td>{{ article.title }}</td>
-                    <td>詳細内容</td>
+                    <td>
+                        <RouterLink v-bind:to="{ name: 'Article', params: { id: id } }">
+                            Link
+                        </RouterLink>
+                    </td>
                 </tr>
             </tbody>
         </table>
