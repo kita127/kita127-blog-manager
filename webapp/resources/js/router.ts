@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import sano from "./components/Sano.vue";
-import sena from "./components/Sena.vue";
+import sano from "./views/Sano.vue";
+import sena from "./views/Sena.vue";
 
 const routes = [
     { path: '/sano', name: 'sano', component: sano },
