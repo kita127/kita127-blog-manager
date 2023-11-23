@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory, RouteLocationNormalized } from 'vue-router';
 import Index from "./views/Index.vue";
 import Article from "./views/Article.vue";
-import About from "./views/About.vue";
 
 const routes = [
     {
@@ -19,12 +18,7 @@ const routes = [
                 id: idNum
             };
         },
-    },
-    {
-        path: '/about',
-        name: 'About',
-        component: About
-    },
+    }
 ]
 
 const router = createRouter({
