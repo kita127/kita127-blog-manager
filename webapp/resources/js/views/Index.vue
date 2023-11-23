@@ -30,17 +30,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
-
-
-// ダミーデータ
-type Summary = {
-    id: number;
-    title: string;
-};
-
-const articles = ref<Map<number, Summary>>(new Map());
-articles.value.set(1, { id: 1, title: "Laravel + Vue3やってみる" });
-articles.value.set(2, { id: 2, title: "TypeScript入門" });
+import { articles } from "../dummy/top";
 
 </script>
 
