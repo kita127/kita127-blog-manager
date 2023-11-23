@@ -47,3 +47,7 @@ $ make down
 
 フロントは更新したら `npm run build` する。
 開発中は `npm run dev`。
+
+## design
+
+`./docs/design.md` にまとめる
